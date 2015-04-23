@@ -1,5 +1,7 @@
 <h1>Rafaels news stand!</h1>
 
+<%= link_to 'New post', new_post_path %>
+
 <% if @posts.count > 0 %>
 	<h2>Listing news</h2>
 	<table>
@@ -14,6 +16,7 @@
      	 	<td><%= post.text %></td>
      	 	<td><%= post.created_at %></td>
      	 	<td><%= post.rating %></td>
+     	 	<td><%= link_to 'Show', post_path(post) %></td>
    	 	</tr>
  	 	<% end %>
 	</table>
