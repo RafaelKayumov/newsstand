@@ -6,6 +6,7 @@
 	<h2>Listing news</h2>
 	<table cellspacing="15">
   		<tr>
+  			<th>Title</th>
     		<th>Text</th>
     		<th>Date</th>
     		<th>Rating</th>
@@ -13,9 +14,10 @@
  
   	<% @posts.each do |post| %>
    	 	<tr>
+   	 		<td><%= post.title %></td>
      	 	<td><%= post.text %></td>
      	 	<td><%= post.formatted_creation_date %></td>
-     	 	<td><%= post.rating %></td>
+     	 	<td align="center"><%= post.rating %></td>
      	 	<td><%= link_to 'Show', post_path(post) %></td>
    	 	</tr>
  	 	<% end %>

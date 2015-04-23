@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   end
 
   def index
-  	#@posts = Post.all.sort_by{ |post| [post[:rating], post[:created_at]]}
   	@posts = Post.all.sort do |a,b|
   		comparsion = a.rating <=> b.rating
   		if comparsion == 0 
@@ -28,6 +27,6 @@ class PostsController < ApplicationController
 
   private
   def post_params
-  	params.require(:post).permit(:text)
+  	params.require(:post).permit(:title, :text)
   end
 end
