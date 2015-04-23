@@ -1,27 +1,35 @@
-<h1>Rafaels news stand!</h1>
-
-<%= link_to 'New post', new_post_path %>
-
-<% if @posts.count > 0 %>
-	<h2>Listing news</h2>
-	<table cellspacing="15">
-  		<tr>
-  			<th>Title</th>
-    		<th>Text</th>
-    		<th>Date</th>
-    		<th>Rating</th>
-  	</tr>
- 
-  	<% @posts.each do |post| %>
-   	 	<tr>
-   	 		<td><%= post.title %></td>
-     	 	<td><%= post.text %></td>
-     	 	<td><%= post.formatted_creation_date %></td>
-     	 	<td align="center"><%= post.rating %></td>
-     	 	<td><%= link_to 'Show', post_path(post) %></td>
-   	 	</tr>
- 	 	<% end %>
-	</table>
-<% else %>
-	<h2>No news yet..</h2>
-<% end %>
+<div class="container">
+	<div class="blog-header" align="center">
+        <h1 class="blog-title">Rafael's news stand</h1>
+        <p class="lead blog-description">Simple rails app</p>
+     </div>
+	
+	<p align="center">
+		<b><%= link_to 'New post', new_post_path %></b>
+	</p>
+    
+    <% if @posts.count > 0 %>
+     	<% @posts.each do |post| %>
+     		<div class="row">
+     			<div class="col-sm-8 blog-main">
+     				<div class="blog-post">
+    					<h2 class="blog-post-title"><%= post.title %></h2>
+     					<p class="blog-post-meta"><%= post.formatted_creation_date %> by <a href="#">some user</a></p>
+     					<p><%= post.text %></p>
+     					<p><%= link_to 'Show', post_path(post) %>
+     						<button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
+  								<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+							</button> 
+							<%= post.rating %>
+						</p>
+     					<hr>
+ 					</div>
+     			</div>
+     		</div>
+     	<% end %>
+    <% else %>
+     	<div class="row">
+			<h2>No news yet..</h2>
+		</div>
+	<% end %>
+</div>

@@ -3,6 +3,9 @@ class Post < ActiveRecord::Base
 	validates :text, presence: true
 
 	def formatted_creation_date
-		created_at.strftime("%F %T")
+		#January 1, 2014 by Mark
+		
+		#created_at.strftime("%F %T")
+		created_at.strftime("%B %d, %Y %H:%M")
 	end
 end
