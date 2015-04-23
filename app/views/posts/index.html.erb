@@ -1,0 +1,22 @@
+<h1>Rafaels news stand!</h1>
+
+<% if @posts.count > 0 %>
+	<h2>Listing news</h2>
+	<table>
+  		<tr>
+    		<th>Text</th>
+    		<th>Date</th>
+    		<th>Rating</th>
+  	</tr>
+ 
+  	<% @posts.each do |post| %>
+   	 	<tr>
+     	 	<td><%= post.text %></td>
+     	 	<td><%= post.created_at %></td>
+     	 	<td><%= post.rating %></td>
+   	 	</tr>
+ 	 	<% end %>
+	</table>
+<% else %>
+	<h2>No news yet..</h2>
+<% end %>
