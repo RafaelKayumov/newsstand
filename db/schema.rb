@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 20150423110253) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "text"
-    t.integer  "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "rating",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
