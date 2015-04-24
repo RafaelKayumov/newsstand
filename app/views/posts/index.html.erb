@@ -1,29 +1,29 @@
 <p align="center">
-	<strong><%= link_to 'New post', new_post_path %></strong>
+  <strong><%= link_to 'New post', new_post_path %></strong>
 </p>
 
 <% if @posts.count > 0 %>
- 	<% @posts.each do |post| %>
- 		<div class="row">
- 			<div class="col-sm-8 blog-main">
- 				<div class="blog-post">
-					<h2 class="blog-post-title"><%= post.title %></h2>
- 					<p class="blog-post-meta"><%= post.formatted_creation_date %> by <a href="#">some user</a></p>
- 					<p><%= post.text %></p>
- 					<p>
- 						<button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
-							<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-					</button> 
-					<%= post.rating %>
- 					</p>
- 					<p><%= link_to 'Show', post_path(post) %></p>
- 					<hr>
-				</div>
- 			</div>
- 		</div>
- 	<% end %>
+  <% @posts.each do |post| %>
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div class="blog-post">
+          <h2 class="blog-post-title"><%= post.title %></h2>
+          <p class="blog-post-meta"><%= post.formatted_creation_date %> by <a href="#">some user</a></p>
+          <p><%= post.text %></p>
+          <p>
+            <button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
+              <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+            </button> 
+            <%= post.rating %>
+          </p>
+          <p><%= link_to 'Show', post_path(post) %></p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% else %>
- 	<div class="row">
-	<h2>No news yet..</h2>
-</div>
+  <div class="row">
+    <h2>No news yet..</h2>
+  </div>
 <% end %>
