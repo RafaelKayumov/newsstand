@@ -1,46 +1,29 @@
-<div class="container">
-	<div style="float:right">
-        <% if user_signed_in? %>
-            Logged in as 
-            <strong><%= current_user.email %></strong>.
-            <%= link_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn btn-default" %>
-        <% else %>
-            <%= link_to "Sign up", new_user_registration_path, :class => "btn btn-default" %>
-            <%= link_to "Sign in", new_user_session_path, :class => "btn btn-default" %>
-        <% end %>
-    </div>
-	<div class="blog-header" align="center">
-        <h1 class="blog-title">Rafael's news stand</h1>
-        <p class="lead blog-description">Simple rails app</p>
-     </div>
-	
-	<p align="center">
-		<b><%= link_to 'New post', new_post_path %></b>
-	</p>
-    
-    <% if @posts.count > 0 %>
-     	<% @posts.each do |post| %>
-     		<div class="row">
-     			<div class="col-sm-8 blog-main">
-     				<div class="blog-post">
-    					<h2 class="blog-post-title"><%= post.title %></h2>
-     					<p class="blog-post-meta"><%= post.formatted_creation_date %> by <a href="#"><%= post.user_email %></a></p>
-     					<p><%= post.text %></p>
-     					<p>
-     						<button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
-  								<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-							</button> 
-							<%= post.rating %>
-     					</p>
-     					<p><%= link_to 'Show', post_path(post) %></p>
-     					<hr>
- 					</div>
-     			</div>
-     		</div>
-     	<% end %>
-    <% else %>
-     	<div class="row">
-			<h2>No news yet..</h2>
-		</div>
-	<% end %>
+<p align="center">
+	<strong><%= link_to 'New post', new_post_path %></strong>
+</p>
+
+<% if @posts.count > 0 %>
+ 	<% @posts.each do |post| %>
+ 		<div class="row">
+ 			<div class="col-sm-8 blog-main">
+ 				<div class="blog-post">
+					<h2 class="blog-post-title"><%= post.title %></h2>
+ 					<p class="blog-post-meta"><%= post.formatted_creation_date %> by <a href="#">some user</a></p>
+ 					<p><%= post.text %></p>
+ 					<p>
+ 						<button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
+							<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+					</button> 
+					<%= post.rating %>
+ 					</p>
+ 					<p><%= link_to 'Show', post_path(post) %></p>
+ 					<hr>
+				</div>
+ 			</div>
+ 		</div>
+ 	<% end %>
+<% else %>
+ 	<div class="row">
+	<h2>No news yet..</h2>
 </div>
+<% end %>
