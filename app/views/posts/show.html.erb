@@ -1,3 +1,4 @@
 <%= render partial: 'post', locals: { display_post: @post } %>
 
-<%= link_to 'Back', posts_path %>
+<p><%= link_to 'Edit', edit_post_path(@post) %></p>
+<p><%= link_to 'Back', posts_path %></p>

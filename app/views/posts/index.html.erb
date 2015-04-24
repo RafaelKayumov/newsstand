@@ -8,7 +8,7 @@
       <div class="col-sm-8 blog-main">
         <div class="blog-post">
           <%= render partial: 'post', locals: { display_post: post } %>
-          <p><%= link_to 'Show', post_path(post) %></p>
+          <p><%= link_to 'Show', post_path(post) %>, <%= link_to 'Edit', edit_post_path(post) %></p>
           <hr>
         </div>
       </div>
