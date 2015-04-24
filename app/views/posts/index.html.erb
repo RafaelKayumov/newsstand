@@ -1,4 +1,14 @@
 <div class="container">
+	<div style="float:right">
+        <% if user_signed_in? %>
+            Logged in as 
+            <strong><%= current_user.email %></strong>.
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn btn-default" %>
+        <% else %>
+            <%= link_to "Sign up", new_user_registration_path, :class => "btn btn-default" %>
+            <%= link_to "Sign in", new_user_session_path, :class => "btn btn-default" %>
+        <% end %>
+    </div>
 	<div class="blog-header" align="center">
         <h1 class="blog-title">Rafael's news stand</h1>
         <p class="lead blog-description">Simple rails app</p>
