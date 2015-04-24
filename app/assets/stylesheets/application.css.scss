@@ -15,3 +15,18 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+.header {
+  position: relative;
+  .blog-header {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  .blog-navigation {
+    position: absolute;
+    right: 0;
+    top: 22px;
+  }
+}
