@@ -51,13 +51,13 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def can_moderate(record)
-    current_user != nil && current_user.id == record.user_id
-  end
-  helper_method :can_moderate
-
   private
   def post_params
     params.require(:post).permit(:title, :text)
   end
+
+  def can_moderate(record)
+    current_user != nil && current_user.id == record.user_id
+  end
+  helper_method :can_moderate
 end
