@@ -5,7 +5,7 @@
 <% if @posts.count > 0 %>
   <% @posts.each do |post| %>
     <div class="row">
-      <div class="col-sm-8 blog-main">
+      <div class="col-sm-12 blog-main">
         <div class="blog-post">
           <%= render partial: 'post', locals: { display_post: post } %>
           <p>
