@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   get 'posts/index'
+  get '/users/:id/posts', to: 'posts#user_index'
 
   resources :posts
 

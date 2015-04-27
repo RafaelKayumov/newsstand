@@ -1,7 +1,3 @@
-<p align="center">
-  <strong><%= link_to 'New post', new_post_path %></strong>
-</p>
-
 <% if @posts.count > 0 %>
   <% @posts.each do |post| %>
     <div class="row">
@@ -26,6 +22,6 @@
   <% end %>
 <% else %>
   <div class="row">
-    <h2>No news yet..</h2>
+    <h2>No posts yet..</h2>
   </div>
 <% end %>

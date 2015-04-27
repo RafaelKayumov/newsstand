@@ -6,12 +6,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.sort do |a,b|
-      comparsion = a.rating <=> b.rating
-      if comparsion == 0 
-        b.created_at <=> a.created_at
-      end
-    end
+    @posts = sort_posts(Post.all)
+  end
+
+  def user_index
+    selective_posts = Post.where("user_id = #{params[:id]}")
+    @posts = sort_posts(selective_posts)
+    render 'index'
   end
 
   def new
@@ -60,4 +61,13 @@ class PostsController < ApplicationController
     current_user != nil && current_user.id == record.user_id
   end
   helper_method :can_moderate
+
+  def sort_posts(posts)
+    posts.sort do |a,b|
+      comparsion = a.rating <=> b.rating
+      if comparsion == 0 
+        b.created_at <=> a.created_at
+      end
+    end
+  end
 end
