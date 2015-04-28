@@ -1,14 +1,14 @@
 class Post < ActiveRecord::Base
-	validates :title, presence: true
-	validates :text, presence: true
+  validates :title, presence: true
+  validates :text, presence: true
 
-	belongs_to :user
+  belongs_to :user
 
-	def formatted_creation_date
-		created_at.strftime("%B %d, %Y %H:%M")
-	end
+  def formatted_creation_date
+    created_at.strftime("%B %d, %Y %H:%M")
+  end
 
-	def user_email
-		self.user.email
-	end
+  def user_email
+    self.user.email
+  end
 end
