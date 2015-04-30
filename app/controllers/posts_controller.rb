@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :authenticate_user!, except: [ :index, :show, :vote_up ]
 
   def show
     @post = Post.find(params[:id])
@@ -50,6 +50,11 @@ class PostsController < ApplicationController
     @post.destroy
  
     redirect_to posts_path
+  end
+
+  def vote_up
+    @post = Post.find(params[:id])
+    @post.vote_up(current_user != nil ? current_user.id : nil, request.remote_ip)
   end
 
   private

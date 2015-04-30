@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'posts/index'
   get '/users/:id/posts', to: 'posts#user_index'
 
+  get 'posts/:id/vote_up', to: 'posts#vote_up'
+
   resources :posts
 
   root 'posts#index'

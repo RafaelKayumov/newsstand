@@ -2,8 +2,8 @@
 <p class="blog-post-meta"><%= display_post.formatted_creation_date %> by <a href="#"><%= display_post.user_email %></a></p>
 <p><%= display_post.text %></p>
 <p>
-  <button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
+  <%= link_to action: 'vote_up', controller: 'posts', id: display_post.id, remote: true do %>
     <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-   </button> 
-  <%= display_post.rating %>
+  <% end %>
+  <span class="rating-value" id="<%= display_post.id%>"><%= display_post.votes.count %></span>
 </p>
