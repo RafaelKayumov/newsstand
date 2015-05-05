@@ -1,43 +1,36 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show, :vote_up ]
+  before_action :authenticate_user!, except: [:index, :show, :vote_up]
+  before_action :find_user, only: [:user_index]
+  before_action :find_post, only: [:show, :edit, :update, :destroy, :vote_up]
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def index
-    @posts = sort_posts(Post.all)
+    @posts = Post.popular_and_newest
   end
 
   def user_index
-    selective_posts = Post.where("user_id = #{params[:id]}")
-    @posts = sort_posts(selective_posts)
+    @posts = @user.posts.popular_and_newest
     render 'index'
   end
 
   def new
     @post = Post.new
-    @post.user_id = current_user.id
   end
 
   def create
-    if user_signed_in?
-      @post = Post.create(post_params)
-      @post.user_id = current_user.id
-      if @post.save
-        redirect_to @post
-      else
-        render 'new'
-      end
+    if current_user.posts.create(post_params)
+      redirect_to posts_path, notice: 'Post was created'
+    else
+      render 'new'
     end
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to @post
     else
@@ -46,33 +39,27 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
- 
-    redirect_to posts_path
+    if @post.destroy
+      redirect_to posts_path
+    else 
+      redirect_to 'edit'
+    end
   end
 
   def vote_up
-    @post = Post.find(params[:id])
-    @post.vote_up(current_user != nil ? current_user.id : nil, request.remote_ip)
+    @post.vote_up(current_user, request.remote_ip)
   end
 
   private
+  def find_user
+    @user = User.find(params[:id])
+  end 
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
   def post_params
     params.require(:post).permit(:title, :text)
-  end
-
-  def can_moderate(record)
-    current_user != nil && current_user.id == record.user_id
-  end
-  helper_method :can_moderate
-
-  def sort_posts(posts)
-    posts.sort do |a,b|
-      comparsion = a.rating <=> b.rating
-      if comparsion == 0 
-        b.created_at <=> a.created_at
-      end
-    end
   end
 end
