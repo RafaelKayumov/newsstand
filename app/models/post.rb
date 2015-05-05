@@ -19,12 +19,14 @@ class Post < ActiveRecord::Base
     self.user_id == user.try(:id)
   end
 
-  def vote_up(user, visitor_ip)
+  def vote(user, visitor_ip)
     user_id = user.try(:id)
-    already_voted = self.votes.any?{ |vote|
+    existing_vote = self.votes.select{ |vote|
       (user_id.present? && vote.user_id == user_id) || (!vote.user_id.present? && !user_id.present? && vote.unknown_user_ip == visitor_ip) 
-    }
-    if !already_voted
+    }.first
+    if existing_vote.present?
+      existing_vote.destroy
+    else
       self.votes.create(user_id: user_id, unknown_user_ip: visitor_ip)
     end
   end

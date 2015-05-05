@@ -2,7 +2,7 @@
 <p class="blog-post-meta"><%= display_post.formatted_creation_date %> by <a href="#"><%= display_post.user_email %></a></p>
 <p><%= display_post.text %></p>
 <p>
-  <%= link_to action: 'vote_up', controller: 'posts', id: display_post.id, remote: true do %>
+  <%= link_to action: 'vote', controller: 'posts', id: display_post.id, remote: true do %>
     <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
   <% end %>
   <span class="rating-value" id="<%= display_post.id%>"><%= display_post.votes.count %></span>

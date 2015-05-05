@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :vote_up]
+  before_action :authenticate_user!, except: [:index, :show, :vote]
   before_action :find_user, only: [:user_index]
-  before_action :find_post, only: [:show, :edit, :update, :destroy, :vote_up]
+  before_action :find_post, only: [:show, :edit, :update, :destroy, :vote]
 
   def show
   end
@@ -46,8 +46,8 @@ class PostsController < ApplicationController
     end
   end
 
-  def vote_up
-    @post.vote_up(current_user, request.remote_ip)
+  def vote
+    @post.vote(current_user, request.remote_ip)
   end
 
   private
