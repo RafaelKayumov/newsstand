@@ -1,9 +1,9 @@
-<h2 class="blog-post-title"><%= display_post.title %></h2>
-<p class="blog-post-meta"><%= display_post.formatted_creation_date %> by <a href="#"><%= display_post.user_email %></a></p>
-<p><%= display_post.text %></p>
+<h2 class="blog-post-title"><%= post.title %></h2>
+<p class="blog-post-meta"><%= post.formatted_creation_date %> by <a href="#"><%= post.user_email %></a></p>
+<p><%= post.text %></p>
 <p>
-  <button type="button" class="btn btn-default" aria-label="Left Align" style="background: none; padding: 0; border: none;">
+  <%= link_to action: 'vote', controller: 'posts', id: post.id, remote: true do %>
     <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-   </button> 
-  <%= display_post.rating %>
+  <% end %>
+  <span class="rating-value" id="<%= post.id%>"><%= post.votes.count %></span>
 </p>
