@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-12 blog-main">
         <div class="blog-post">
-          <%= render partial: 'post', locals: { display_post: post } %>
+          <%= render post %>
           <p>
             <% if post.can_moderate(current_user) %>
               <%= link_to 'Show', post_path(post)%>,

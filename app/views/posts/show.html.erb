@@ -1,4 +1,4 @@
-<%= render partial: 'post', locals: { display_post: @post } %>
+<%= render @post %>
 
 <% if @post.can_moderate(current_user) %>
   <p>
