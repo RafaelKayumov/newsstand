@@ -1,8 +1,1 @@
 $("#<%= @post.id%>.rating-value").html("<%= @post.votes.count %>");
-
-/*
-$("#<%= @post.id%>.rating-button").click(function() {
-  $.ajax("/posts/<%= @post.id%>/vote")
-  $("#<%= @post.id%>.rating-value").html('<%= @post.votes.count %>')
-});
-*/

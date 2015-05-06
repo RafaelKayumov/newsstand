@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     if @post.destroy
       redirect_to posts_path
     else 
-      redirect_to 'edit'
+      redirect_to edit_post_path(@post)
     end
   end
 
