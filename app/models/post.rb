@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
 
   scope :foremost, -> { order('rating DESC, created_at DESC') }
 
-  def can_moderate(user)
+  def moderate?(user)
     self.user_id == user.try(:id)
   end
 

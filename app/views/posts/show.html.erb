@@ -1,6 +1,6 @@
 <%= render @post %>
 
-<% if @post.can_moderate(current_user) %>
+<% if @post.moderate?(current_user) %>
   <p>
     <%= link_to 'Edit', edit_post_path(@post) %>, 
     <%= link_to 'Delete', post_path(@post),
