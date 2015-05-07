@@ -7,10 +7,6 @@ class Post < ActiveRecord::Base
 
   scope :foremost, -> { order('rating DESC, created_at DESC') }
 
-  def formatted_creation_date
-    created_at.strftime("%B %d, %Y %H:%M")
-  end
-
   def user_email
     self.user.email
   end
