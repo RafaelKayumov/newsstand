@@ -1,9 +1,9 @@
 class Post < ActiveRecord::Base
+  belongs_to :user, inverse_of: :posts
+  has_many :votes, dependent: :destroy, inverse_of: :post
+
   validates :title, presence: true
   validates :text, presence: true
-
-  belongs_to :user
-  has_many :votes
 
   scope :popular_and_newest, -> { order('rating DESC, created_at DESC') }
 
