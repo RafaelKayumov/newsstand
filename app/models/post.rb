@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   validates :text, presence: true
 
-  scope :popular_and_newest, -> { order('rating DESC, created_at DESC') }
+  scope :foremost, -> { order('rating DESC, created_at DESC') }
 
   def formatted_creation_date
     created_at.strftime("%B %d, %Y %H:%M")

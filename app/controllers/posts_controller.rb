@@ -7,11 +7,11 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.popular_and_newest
+    @posts = Post.foremost
   end
 
   def user_index
-    @posts = @user.posts.popular_and_newest
+    @posts = @user.posts.foremost
     render 'index'
   end
 
