@@ -12,15 +12,11 @@ class Post < ActiveRecord::Base
     self.user_id == user.try(:id)
   end
 
-  def vote(user, visitor_ip)
-    user_id = user.try(:id)
-    existing_vote = self.votes.select{ |vote|
-      (user_id.present? && vote.user_id == user_id) || (!vote.user_id.present? && !user_id.present? && vote.unknown_user_ip == visitor_ip) 
-    }.first
-    if existing_vote.present?
-      existing_vote.destroy
-    else
-      self.votes.create(user_id: user_id, unknown_user_ip: visitor_ip)
+  def vote(user)
+    if !votes.exists?(user_id: user.id)
+      votes.create(user_id: user.id)
+    else 
+      votes.where(user_id: user.id).first.destroy
     end
   end
 end

@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  VOTES = :votes
+
   before_action :authenticate_user!, except: [:index, :show, :vote]
   before_action :find_user, only: [:user_index]
   before_action :find_post, only: [:show, :edit, :update, :destroy, :vote]
@@ -47,7 +49,19 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @post.vote(current_user, request.remote_ip)
+    if user_signed_in?
+      @post.vote(current_user)
+    else
+      votes = cookies[VOTES].split(',')
+      existing_vote_id = @post.votes.where(id: votes).first
+      if existing_vote_id
+        @post.votes.destroy(existing_vote_id)
+        votes.delete(existing_vote_id)
+      else
+        votes.push(@post.votes.create.id)
+      end
+      cookies[VOTES] = votes.join(',')
+    end 
   end
 
   private
