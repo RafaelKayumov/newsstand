@@ -2,8 +2,8 @@
 <p class="blog-post-meta"><%= I18n.l(post.created_at, format: :short) %> by <a href="#"><%= post.email %></a></p>
 <p><%= post.text %></p>
 <p>
-  <%= link_to vote_post_path(post), remote: true do %>
+  <%= link_to vote_post_path(post), method: :patch, remote: true do %>
     <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
   <% end %>
-  <span class="rating-value" id="<%= post.id%>"><%= post.votes.count %></span>
+  <span id="<%= dom_id(post, :rating)%>"><%= post.votes.count %></span>
 </p>
