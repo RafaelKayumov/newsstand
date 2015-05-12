@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show, :vote]
   before_action :find_user, only: [:user_index]
-  before_action :find_post, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :find_post, only: [:show, :vote]
+  before_action :find_own_post, only: [:edit, :update, :destroy]
 
   def show
   end
@@ -68,6 +69,10 @@ class PostsController < ApplicationController
   def find_user
     @user = User.find(params[:id])
   end 
+
+  def find_own_post
+    @post = current_user.posts.find(params[:id])
+  end
 
   def find_post
     @post = Post.find(params[:id])
