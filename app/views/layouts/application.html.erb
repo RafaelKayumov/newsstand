@@ -14,11 +14,11 @@
       <p class="lead blog-description">Simple rails app</p>
       <% if user_signed_in? %>
         <p align="center">
-          <strong><%= link_to 'New post', new_post_path%></strong>
+          <strong><%= link_to 'New post', new_post_path %></strong>
           ·
-          <strong><%= link_to 'My posts', action: 'user_index', controller: 'posts', id: current_user.id %></strong>
+          <strong><%= link_to 'My posts', user_posts_path(current_user) %></strong>
           ·
-          <strong><%= link_to 'All posts', action: 'index', controller: 'posts' %></strong>
+          <strong><%= link_to 'All posts', posts_path %></strong>
         </p>
       <% end %>
     </div>
