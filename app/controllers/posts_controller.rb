@@ -53,19 +53,23 @@ class PostsController < ApplicationController
     if user_signed_in?
       @post.vote(current_user)
     else
-      votes = cookies[VOTES].split(',')
-      existing_vote_id = @post.votes.where(id: votes).first
-      if existing_vote_id
-        @post.votes.destroy(existing_vote_id)
-        votes.delete(existing_vote_id)
-      else
-        votes.push(@post.votes.create.id)
-      end
-      cookies[VOTES] = votes.join(',')
+      vote_cookies
     end 
   end
 
   private
+  def vote_cookies
+    votes = (cookies[VOTES] || '').split(',')
+    existing_vote_id = @post.votes.find_by(id: votes)
+    if existing_vote_id
+      @post.votes.destroy(existing_vote_id)
+      votes.delete(existing_vote_id)
+    else
+      votes.push(@post.votes.create.id)
+    end
+    cookies[VOTES] = votes.join(',')
+  end
+  
   def find_user
     @user = User.find(params[:id])
   end 

@@ -13,10 +13,10 @@ class Post < ActiveRecord::Base
   end
 
   def vote(user)
-    if !votes.exists?(user_id: user.id)
-      votes.create(user_id: user.id)
-    else 
-      votes.where(user_id: user.id).first.destroy
+    if vote = votes.find_by(user_id: user.id)
+      vote.destroy
+    else
+      votes.create(user_id: user_id)
     end
   end
 end
