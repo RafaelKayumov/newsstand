@@ -1,17 +1,20 @@
 class PostsController < ApplicationController
+  VOTES = :votes
+
   before_action :authenticate_user!, except: [:index, :show, :vote]
   before_action :find_user, only: [:user_index]
-  before_action :find_post, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :find_post, only: [:show, :vote]
+  before_action :find_own_post, only: [:edit, :update, :destroy]
 
   def show
   end
 
   def index
-    @posts = Post.popular_and_newest
+    @posts = Post.foremost
   end
 
   def user_index
-    @posts = @user.posts.popular_and_newest
+    @posts = @user.posts.foremost
     render 'index'
   end
 
@@ -47,13 +50,33 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @post.vote(current_user, request.remote_ip)
+    if user_signed_in?
+      @post.vote(current_user)
+    else
+      vote_cookies
+    end 
   end
 
   private
+  def vote_cookies
+    votes = (cookies[VOTES] || '').split(',')
+    existing_vote_id = @post.votes.find_by(id: votes)
+    if existing_vote_id
+      @post.votes.destroy(existing_vote_id)
+      votes.delete(existing_vote_id)
+    else
+      votes.push(@post.votes.create.id)
+    end
+    cookies[VOTES] = votes.join(',')
+  end
+  
   def find_user
     @user = User.find(params[:id])
   end 
+
+  def find_own_post
+    @post = current_user.posts.find(params[:id])
+  end
 
   def find_post
     @post = Post.find(params[:id])

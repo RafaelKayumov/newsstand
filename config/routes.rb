@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   get 'posts/index'
-  get '/users/:id/posts', to: 'posts#user_index'
+  get '/users/:id/posts', to: 'posts#user_index', as: 'user_posts'
 
-  get 'posts/:id/vote', to: 'posts#vote'
-
-  resources :posts
+  resources :posts do
+    patch :vote, on: :member
+  end
 
   root 'posts#index'
 

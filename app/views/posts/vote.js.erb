@@ -1,1 +1,1 @@
-$("#<%= @post.id%>.rating-value").html("<%= @post.votes.count %>");
+$("#<%= dom_id(@post, :rating)%> ").html("<%= @post.votes.count %>");
